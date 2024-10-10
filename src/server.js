@@ -1,18 +1,16 @@
-import express from "express"
-import { config } from "dotenv"
+import express from "express";
+import { config } from "dotenv";
 
-config()
+import routes from "./routes/index.routes.js";
 
-const port = process.env.PORT || 3000
+config();
 
-const app = express()
+const serverPort = process.env.PORT || 3000;
 
-app.use(express.json())
+const app = express();
+app.use(express.json());
+app.use(routes);
 
-app.get("/", (req, res) => {
-return res.status(200).send({ message:"Hello, World!"})
-})
-
-app.listen(port, () => {
-    console.log(`Server está on line pae em http://localhost:${port}`)
-})
+app.listen(serverPort, () => {
+    console.log(`server está on line pae em http://localhost:${serverPort}`);
+});

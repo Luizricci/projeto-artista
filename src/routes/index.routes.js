@@ -1,4 +1,5 @@
 import { Router } from "express";
+import  procuradosRoutes from "./procurados.routes.js";
 
 
 const routes = Router();
@@ -9,5 +10,6 @@ routes.get("/", (req, res) => {
 });
 
 
+routes.use("/artistas", procuradosRoutes);
 
 export default routes;
