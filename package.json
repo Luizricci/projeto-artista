@@ -1,0 +1,20 @@
+{
+  "name": "projeto-back-end-2",
+  "version": "1.0.0",
+  "description": "\"neste projeto eu irei fazer uma atividade sobre investigação do FBI\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "Piddy",
+    "lord",
+    "back-end",
+    "felipe-DEV",
+    "Tupac",
+    "DiCaprio"
+  ],
+  "author": "Luiz Henrique Ricci Aureliano",
+  "license": "MIT"
+}
