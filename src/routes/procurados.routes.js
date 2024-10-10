@@ -12,12 +12,14 @@ let artistas = [
       "tamanho baixo",
     ],
     envolvimentosSuspeito: "sim",
+    idade: 54
   },
   {
     id: Math.floor(Math.random() * 1000000),
     nome: "michael jackson",
     descricaoFisica: ["cabelos longos", "olhos pretos", "tamanho alto"],
     envolvimentosSuspeito: "sim",
+    idade: 50
   },
 ];
 
@@ -28,7 +30,7 @@ procuradosRoutes.get("/", (req, res) => {
 
 // Rota para cadastrar um novo artista
 procuradosRoutes.post("/", (req, res) => {
-  const { nome, descricaoFisica, envolvimentosSuspeito } = req.body;
+  const { nome, descricaoFisica, envolvimentosSuspeito, idade } = req.body;
 
   // Validação do campo obrigatório
   if (!nome) {
@@ -50,6 +52,7 @@ procuradosRoutes.post("/", (req, res) => {
     nome,
     descricaoFisica: descricaoFisica || [], // Valor padrão caso descricaoFisica não seja enviado
     envolvimentosSuspeito,
+    idade,
   };
 
   // Adiciona o novo Artista ao array de artistas
@@ -84,12 +87,18 @@ procuradosRoutes.put("/:id", (req, res) => {
 
   //console.log(id);
   
-  const { nome, descricaoFisica, envolvimentosSuspeito } = req.body;
+  const { nome, descricaoFisica, envolvimentosSuspeito, idade} = req.body;
 
-  console.log(nome, descricaoFisica, envolvimentosSuspeito);
 
   // Busca um artista pelo id no array de artista
   const artista = artistas.find((rapper) => rapper.id == id);
+
+ // Verifica se o artista foi encontrado
+ if (!artista) {
+    return res
+      .status(404)
+      .json({ message: `Artista com id ${id} não encontrado!` });
+  }
 
   // Validação do campo obrigatório
   if (!nome) {
@@ -108,6 +117,7 @@ procuradosRoutes.put("/:id", (req, res) => {
   artista.nome = nome;
   artista.descricaoFisica = descricaoFisica;
   artista.envolvimentosSuspeito = envolvimentosSuspeito;
+  artista.idade = idade
 
   return res.status(200).json({
     message: "artista atualizado com sucesso!",
@@ -119,24 +129,24 @@ procuradosRoutes.put("/:id", (req, res) => {
 procuradosRoutes.delete("/:id", (req, res) => {
     const { id } = req.params;
   
-    // Busca um planeta pelo id no array de planetas
+    // Busca um artista pelo id no array de artistas
     const artista = artistas.find((rapper) => rapper.id == id);
   
-    // Verifica se o planeta foi encontrado
+    // Verifica se o artista foi encontrado
     if (!artista) {
       return res
         .status(404)
         .json({ message: `Artista com id ${id} não encontrado!` });
     }
   
-    // Remove o planeta do array de planetas
+    // Remove o artista do array de artistas
     artistas = artistas.filter((rapper) => rapper.id != id);
   
     return res.status(200).json({
       message: "Artista removido com sucesso!",
       artistas,
     });
-  });
+});
 
 
 export default procuradosRoutes;
