@@ -14,5 +14,5 @@ return res.status(200).send({ message:"Hello, World!"})
 })
 
 app.listen(port, () => {
-    console.log(`Server está on line pae em http://localhost: ${port}`)
+    console.log(`Server está on line pae em http://localhost:${port}`)
 })
