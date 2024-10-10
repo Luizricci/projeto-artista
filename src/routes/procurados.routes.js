@@ -23,7 +23,7 @@ let artistas = [
 
 // Rota para listar todos os artistas Procurados
 procuradosRoutes.get("/", (req, res) => {
-  return res.status(200).json(artistas);
+    return res.status(200).json(artistas);
 });
 
 // Rota para cadastrar um novo artista
@@ -114,5 +114,29 @@ procuradosRoutes.put("/:id", (req, res) => {
     artista,
   });
 });
+
+// Rota para deletar um artista
+procuradosRoutes.delete("/:id", (req, res) => {
+    const { id } = req.params;
+  
+    // Busca um planeta pelo id no array de planetas
+    const artista = artistas.find((rapper) => rapper.id == id);
+  
+    // Verifica se o planeta foi encontrado
+    if (!artista) {
+      return res
+        .status(404)
+        .json({ message: `Artista com id ${id} não encontrado!` });
+    }
+  
+    // Remove o planeta do array de planetas
+    artistas = artistas.filter((rapper) => rapper.id != id);
+  
+    return res.status(200).json({
+      message: "Artista removido com sucesso!",
+      artistas,
+    });
+  });
+
 
 export default procuradosRoutes;
