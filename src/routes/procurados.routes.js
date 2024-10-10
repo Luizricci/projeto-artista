@@ -50,6 +50,23 @@ return res.status(201).json({
 });
 });
 
+// Rota para buscar um planeta pelo id
+procuradosRoutes.get("/:id", (req, res) => {
+    const { id } = req.params;
+    
+      // Busca um planeta pelo id no array de planetas
+    const artista = artistas.find((planet) => planet.id == id);
+    
+      // Verifica se o planeta foi encontrado
+    if (!artista) {
+        return res
+            .status(404)
+            .json({ message: `artista com id ${id} não encontrado!` });
+    }
+    
+        return res.status(200).json(artista);
+    });
+
 
 
 
